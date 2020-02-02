@@ -1,7 +1,9 @@
 from newsapi.newsapi_client import NewsApiClient
 from textblob import TextBlob
+import config
 
-newsapi = NewsApiClient(api_key='375a701110244bd5acc09fe418c0857d')
+key = config.API_KEY
+newsapi = NewsApiClient(api_key=key)
 
 # /v2/top-headlines
 
@@ -92,7 +94,7 @@ def main():
 	"the-hindu",
 	"the-hill"]
 
-	print (news_source)
+	#print (news_source)
 	for i in range (len(news_source)): 
 		getContent(news_source[i])
 
@@ -122,7 +124,6 @@ def getContent (news_source):
 			continue
 
 	for i in range(len(title)):
-
 		print ("title: ", title[i], "\n\n")
 
 
