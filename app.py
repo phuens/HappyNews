@@ -54,7 +54,7 @@ def getContent (news_source):
 		myarticles = articles[i]
 		if (myarticles['content'] != None):								# Some articles have no content so need to check that. 
 			opinion = TextBlob(myarticles['content'])					# Check the sentiment of the news content. 
-			if (opinion.sentiment.polarity > 0.5):
+			if (opinion.sentiment.polarity > 0):
 				polarity.append(opinion.sentiment.polarity)
 				subjectivity.append(opinion.sentiment.subjectivity)
 				content.append(myarticles['content'])
@@ -76,15 +76,24 @@ def postContent(title, desc, img, content, polarity, subjectivity):
 	for i in range(len(title)): 
 		authenticator = IAMAuthenticator(config.IBM_API_KEY)
 		nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
-		nlu.set_service_url('https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/c47e30f1-4999-4bc2-9552-3987548fd6c2')
-		response = nlu.analyze( text = content[i], features = {
-         "sentiment": {},
-      })
-		print (response)
+		nlu.set_service_url(config.IBM_URL)
+		response = nlu.analyze( text = content[i], features = {"sentiment": {}})
+		result = response.result['sentiment']
+		print (result.document)
+
+
+
    
 
 if __name__ == '__main__': 
 	main()
+
+
+
+
+
+
+
 
 
 
