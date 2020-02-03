@@ -7,12 +7,8 @@ from ibm_watson.natural_language_understanding_v1 import Features, CategoriesOpt
 import config
 
 
-key = config.API_KEY
-newsapi = NewsApiClient(api_key=key)
 
-# /v2/top-headlines
-
-# /v2/everything
+newsapi = NewsApiClient(api_key=config.API_KEY)
 
 
 def main(): 
@@ -20,7 +16,6 @@ def main():
 	
 """
 Reads a txt file containing the source of the news and passes it as a parameter to call getContent function. 
-
 @return: void 
 @param: void
 """
@@ -38,10 +33,8 @@ def readSourceFile ():
 """
 Calls the newsAPI to get the content and stores the different information associated 
 with the news articles. 
-
 @return : news title, desciption, image link, content, polarity and subjectivity of content
 @param: source of the news from where you are extracting the content. eg. 'bbc-news' 
-
 """
 def getContent (news_source):
 
@@ -76,11 +69,9 @@ def getContent (news_source):
 
 """
 Uploads the content of the news to the database. 
-
 @return: void 
 @para: news title, desciption, image link, content, polarity and subjectivity of content
 """
-
 def postContent(title, desc, img, content, polarity, subjectivity):
 	for i in range(len(title)): 
 		authenticator = IAMAuthenticator(config.IBM_API_KEY)
