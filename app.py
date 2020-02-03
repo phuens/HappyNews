@@ -27,14 +27,16 @@ def readSourceFile ():
 
 def getContent (news_source):
 	title = []
-	desc=[]
-	img=[]
-	content =[]
-	polarity =[]
-	subjectivity =[]
+	desc = []
+	img = []
+	content = []
+	polarity = []
+	subjectivity = []
+
+	# Call the newsAPI 
 	news =  newsapi.get_everything(sources=news_source,language='en',sort_by='relevancy', page=5)	
-	
-	articles = news['articles']
+	articles = news['articles']											# Store the articles returned from the API call
+
 	for i in range(len(articles)):
 		myarticles = articles[i]
 		if (myarticles['content'] != None):
