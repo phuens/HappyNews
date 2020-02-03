@@ -83,10 +83,12 @@ Uploads the content of the news to the database.
 
 def postContent(title, desc, img, content, polarity, subjectivity):
 	for i in range(len(title)): 
-		authenticator = IAMAuthenticator('XCP87PtYM8R9j5wm10smBdBmm56VwnUku0m3X6acYXDV')
+		authenticator = IAMAuthenticator(config.IBM_API_KEY)
 		nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
 		nlu.set_service_url('https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/c47e30f1-4999-4bc2-9552-3987548fd6c2')
-		response = nlu.analyze( text = content[i], features = Features(sentiment=SentimentOptions()))
+		response = nlu.analyze( text = content[i], features = {
+         "sentiment": {},
+      })
 		print (response)
    
 
