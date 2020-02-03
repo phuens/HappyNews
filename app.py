@@ -15,6 +15,10 @@ newsapi = NewsApiClient(api_key=key)
 def main(): 
 	readSourceFile()
 	
+"""
+@return: void 
+@param: void
+"""
 def readSourceFile (): 
 	source_file = open("sources.txt", "r")		# Read the file containing the news sources.
 	sources = source_file.readlines()			# Read line by line.
@@ -25,7 +29,14 @@ def readSourceFile ():
 		getContent(sources[i])
 
 
+
+"""
+@return : news title, desciption, image link, content, polarity and subjectivity of content
+@param: source of the news from where you are extracting the content. eg. 'bbc-news' 
+
+"""
 def getContent (news_source):
+
 	title = []
 	desc = []
 	img = []
@@ -37,7 +48,8 @@ def getContent (news_source):
 	news =  newsapi.get_everything(sources=news_source,language='en',sort_by='relevancy', page=5)	
 	articles = news['articles']											# Store the articles returned from the API call.
 
-	for i in range(len(articles)):
+
+	for i in range(len(articles)):										# Loop through all the articles. 
 		myarticles = articles[i]
 		if (myarticles['content'] != None):								# Some articles have no content so need to check that. 
 			opinion = TextBlob(myarticles['content'])					# Check the sentiment of the news content. 
@@ -50,7 +62,16 @@ def getContent (news_source):
 				img.append(myarticles['urlToImage'])
 		else: 
 			continue
+	postContent(title, desc, img, content,polarity, subjectivity)
 
+
+
+"""
+@return: void 
+@para: news title, desciption, image link, content, polarity and subjectivity of content
+"""
+
+def postContent(title, desc, img, content,polarity, subjectivity):
 	for i in range(len(title)):
 		print ("title: ", title[i], "\n\n")
 
