@@ -13,6 +13,9 @@ newsapi = NewsApiClient(api_key=key)
 
 
 def main(): 
+	readSourceFile()
+	
+def readSourceFile (): 
 	source_file = open("sources.txt", "r")
 	sources = source_file.readlines()
 	source_file.close()
