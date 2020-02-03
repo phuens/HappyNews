@@ -44,10 +44,10 @@ def getContent (news_source):
 	content = []
 	polarity = []
 	subjectivity = []
-
 	# Call the newsAPI 
 	news =  newsapi.get_everything(sources=news_source,language='en',sort_by='relevancy', page=5)	
 	articles = news['articles']											# Store the articles returned from the API call.
+
 
 
 	for i in range(len(articles)):										# Loop through all the articles. 
@@ -78,11 +78,10 @@ def postContent(title, desc, img, content, polarity, subjectivity):
 		nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
 		nlu.set_service_url(config.IBM_URL)
 		response = nlu.analyze( text = content[i], features = {"sentiment": {}})
-		result = response.result['sentiment']
-		print (result.document)
+		result = response.result['sentiment']['document']['score']
+		print (title[i], "\n IBM WATSON: ", result, "TEXT BLOB: ", polarity[i], '\n\n\n')
 
-
-
+		
    
 
 if __name__ == '__main__': 
