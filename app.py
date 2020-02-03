@@ -43,27 +43,33 @@ def getContent (news_source):
 	img = []
 	content = []
 	polarity = []
-	subjectivity = []
 	# Call the newsAPI 
 	news =  newsapi.get_everything(sources=news_source,language='en',sort_by='relevancy', page=5)	
 	articles = news['articles']											# Store the articles returned from the API call.
+
+	authenticator = IAMAuthenticator(config.IBM_API_KEY)
+	watson_nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
+	watson_nlu.set_service_url(config.IBM_URL)
 
 
 
 	for i in range(len(articles)):										# Loop through all the articles. 
 		myarticles = articles[i]
 		if (myarticles['content'] != None):								# Some articles have no content so need to check that. 
-			opinion = TextBlob(myarticles['content'])					# Check the sentiment of the news content. 
-			if (opinion.sentiment.polarity > 0):
-				polarity.append(opinion.sentiment.polarity)
-				subjectivity.append(opinion.sentiment.subjectivity)
+			textblob_polarity = TextBlob(myarticles['content']).sentiment.polarity			# Check the sentiment of the news content. 
+			watson_sentiment = watson_nlu.analyze( text = myarticles['content'], features = {"sentiment": {}})
+			watson_polarity = watson_sentiment.result['sentiment']['document']['score']
+
+			if (textblob_polarity > 0 and watson_polarity > 0):
+				polarity.append(textblob_polarity)
 				content.append(myarticles['content'])
 				title.append(myarticles['title'])				
 				desc.append(myarticles['description'])
 				img.append(myarticles['urlToImage'])
+
 		else: 
 			continue
-	postContent(title, desc, img, content,polarity, subjectivity)
+	postContent(title, desc, img, content,polarity)
 
 
 
@@ -72,15 +78,9 @@ Uploads the content of the news to the database.
 @return: void 
 @para: news title, desciption, image link, content, polarity and subjectivity of content
 """
-def postContent(title, desc, img, content, polarity, subjectivity):
+def postContent(title, desc, img, content, polarity):
 	for i in range(len(title)): 
-		authenticator = IAMAuthenticator(config.IBM_API_KEY)
-		nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
-		nlu.set_service_url(config.IBM_URL)
-		response = nlu.analyze( text = content[i], features = {"sentiment": {}})
-		result = response.result['sentiment']['document']['score']
-		print (title[i], "\n IBM WATSON: ", result, "TEXT BLOB: ", polarity[i], '\n\n\n')
-
+		print (i , "  ", title[i], "\n")
 		
    
 
