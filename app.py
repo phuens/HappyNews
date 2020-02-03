@@ -16,6 +16,8 @@ def main():
 	readSourceFile()
 	
 """
+Reads a txt file containing the source of the news and passes it as a parameter to call getContent function. 
+
 @return: void 
 @param: void
 """
@@ -31,6 +33,9 @@ def readSourceFile ():
 
 
 """
+Calls the newsAPI to get the content and stores the different information associated 
+with the news articles. 
+
 @return : news title, desciption, image link, content, polarity and subjectivity of content
 @param: source of the news from where you are extracting the content. eg. 'bbc-news' 
 
@@ -67,6 +72,8 @@ def getContent (news_source):
 
 
 """
+Uploads the content of the news to the database. 
+
 @return: void 
 @para: news title, desciption, image link, content, polarity and subjectivity of content
 """
