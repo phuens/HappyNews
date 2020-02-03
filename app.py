@@ -16,11 +16,11 @@ def main():
 	readSourceFile()
 	
 def readSourceFile (): 
-	source_file = open("sources.txt", "r")		# Read the file containing the news sources
-	sources = source_file.readlines()			# Read line by line 
-	source_file.close()							# Close 
+	source_file = open("sources.txt", "r")		# Read the file containing the news sources.
+	sources = source_file.readlines()			# Read line by line.
+	source_file.close()							# Close. 
 
-	for i in range (len(sources)):				# call the getContent function one by one with the news source as parameter
+	for i in range (len(sources)):				# call the getContent function one by one with the news source as parameter.
 		print(sources[i]) 
 		getContent(sources[i])
 
@@ -35,12 +35,12 @@ def getContent (news_source):
 
 	# Call the newsAPI 
 	news =  newsapi.get_everything(sources=news_source,language='en',sort_by='relevancy', page=5)	
-	articles = news['articles']											# Store the articles returned from the API call
+	articles = news['articles']											# Store the articles returned from the API call.
 
 	for i in range(len(articles)):
 		myarticles = articles[i]
-		if (myarticles['content'] != None):
-			opinion = TextBlob(myarticles['content'])
+		if (myarticles['content'] != None):								# Some articles have no content so need to check that. 
+			opinion = TextBlob(myarticles['content'])					# Check the sentiment of the news content. 
 			if (opinion.sentiment.polarity > 0.5):
 				polarity.append(opinion.sentiment.polarity)
 				subjectivity.append(opinion.sentiment.subjectivity)
