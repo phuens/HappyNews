@@ -1,6 +1,9 @@
 from newsapi.newsapi_client import NewsApiClient
 from textblob import TextBlob
 from firebase import firebase
+from ibm_watson import NaturalLanguageUnderstandingV1
+from ibm_cloud_sdk_core.authenticators import IAMAuthenticator
+from ibm_watson.natural_language_understanding_v1 import Features, CategoriesOptions
 import config
 
 
@@ -78,18 +81,18 @@ Uploads the content of the news to the database.
 @para: news title, desciption, image link, content, polarity and subjectivity of content
 """
 
-def postContent(title, desc, img, content,polarity, subjectivity):
-	for i in range(len(title)):
-		print ("title: ", title[i], "\n\n")
-
-
-
-
-
-
-
-
-
+def postContent(title, desc, img, content, polarity, subjectivity):
+	for i in range(len(title)): 
+		authenticator = IAMAuthenticator('XCP87PtYM8R9j5wm10smBdBmm56VwnUku0m3X6acYXDV')
+		nlu = NaturalLanguageUnderstandingV1(version='2019-07-12',authenticator=authenticator)
+		nlu.set_service_url('https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/c47e30f1-4999-4bc2-9552-3987548fd6c2')
+		response = nlu.analyze( text = content[i], features = Features(sentiment=SentimentOptions()))
+		print (response)
+   
 
 if __name__ == '__main__': 
 	main()
+
+
+
+
