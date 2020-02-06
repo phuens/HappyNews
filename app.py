@@ -21,6 +21,7 @@ def Index():
     news_station = []
     url_to_news = []
     url_img = []
+    all_info = []
     for key, val in content.items():
         print(key)
         print(val['Url_to_img'])
@@ -32,8 +33,11 @@ def Index():
         news_station.append(val['News_station']['name'])
         url_to_news.append(val['Url_to_news'])
         news_content.append(val['Content'])
+        url_img.append(val['Url_to_img'])
 
-    return render_template('index.html', news_content=news_content)
+    all_info = (zip(title, desc, publish_date, textblob_pol,
+                    watson_pol, news_station, news_content, url_img))
+    return render_template('index.html', context=all_info)
 
 
 if __name__ == "__main__":

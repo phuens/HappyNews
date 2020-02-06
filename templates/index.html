@@ -16,10 +16,17 @@
         Happy News
       </h1>
     </div>
-
     <div class="container">
-      {% for i in news_content %}
-      <p>{{i}}</p>
+      {% for a,b,c,d,e,f,g,h in context %}
+      <p>{{a}}</p>
+      <p style="color:red">{{b}}</p>
+      <p>{{c}}</p>
+      <p style="color:green">{{d}}</p>
+      <p>{{e}}</p>
+      <p style="color:blue">{{f}}</p>
+      <p>{{g}}</p>
+      <p style="color:paleturquoise">{{h}}</p>
+
       {% endfor %}
     </div>
   </body>
