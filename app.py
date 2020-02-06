@@ -12,7 +12,8 @@ def Index():
     content = firebase_app.get('/happynews-99c12/', '')
 
     for key, val in content.items():
-        return render_template('index.html', title=val['Description'])
+        return render_template('index.html', url_to_news=val['Url_to_news'], news_source=val['News_station']['name'], date=val['Publish_date'], url_to_img=val['Url_to_img'],
+                               content=val['Content'], title=val['Title'], description=val['Description'])
 
 
 if __name__ == "__main__":
