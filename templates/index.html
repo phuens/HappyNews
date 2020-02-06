@@ -18,7 +18,9 @@
     </div>
 
     <div class="container">
-      {%block content%} {{title}} {% endblock %}
+      {% for i in news_content %}
+      <p>{{i}}</p>
+      {% endfor %}
     </div>
   </body>
 </html>

@@ -11,9 +11,29 @@ def Index():
         'https://happynews-99c12.firebaseio.com/')
     content = firebase_app.get('/happynews-99c12/', '')
 
+    print("\n\n", content, "\n\n")
+    news_content = []
+    title = []
+    desc = []
+    publish_date = []
+    textblob_pol = []
+    watson_pol = []
+    news_station = []
+    url_to_news = []
+    url_img = []
     for key, val in content.items():
-        return render_template('index.html', url_to_news=val['Url_to_news'], news_source=val['News_station']['name'], date=val['Publish_date'], url_to_img=val['Url_to_img'],
-                               content=val['Content'], title=val['Title'], description=val['Description'])
+        print(key)
+        print(val['Url_to_img'])
+        title.append(val['Title'])
+        desc.append(val['Description'])
+        publish_date.append(val['Publish_date'])
+        textblob_pol.append(val['Textblob_polarity'])
+        watson_pol.append(val['Watson_polarity'])
+        news_station.append(val['News_station']['name'])
+        url_to_news.append(val['Url_to_news'])
+        news_content.append(val['Content'])
+
+    return render_template('index.html', news_content=news_content)
 
 
 if __name__ == "__main__":

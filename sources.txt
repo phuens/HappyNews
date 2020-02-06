@@ -34,7 +34,6 @@ google-news-ca
 google-news-in
 google-news-uk
 hacker-news
-ign
 independent
 mashable
 medical-news-today
