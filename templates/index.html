@@ -17,15 +17,15 @@
       </h1>
     </div>
     <div class="container">
-      {% for a,b,c,d,e,f,g,h in context %}
-      <p>{{a}}</p>
-      <p style="color:red">{{b}}</p>
-      <p>{{c}}</p>
-      <p style="color:green">{{d}}</p>
-      <p>{{e}}</p>
-      <p style="color:blue">{{f}}</p>
-      <p>{{g}}</p>
-      <p style="color:paleturquoise">{{h}}</p>
+      {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_img in context %}
+      <p>{{title}}</p>
+      <p style="color:rosybrown">{{desc}}</p>
+      <p>{{publish_date}}</p>
+      <p style="color:brown">{{textblob_pol}}</p>
+      <p>{{watson_pol}}</p>
+      <p style="color:pink">{{news_station}}</p>
+      <p>{{news_content}}</p>
+      <img src="{{url_img}}" style="width:300px" />
 
       {% endfor %}
     </div>
