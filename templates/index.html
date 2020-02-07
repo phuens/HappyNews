@@ -11,14 +11,22 @@
     />
     <style>
       .news_image {
-        width: 400px;
+        width: 100%;
+        height: auto;
+        overflow: hidden;
       }
       .news_title {
         background: red;
-        margin: 0px;
+        margin: 0px -15px;
       }
-      .tron {
+      .news_box {
         margin: 20px 50px;
+      }
+      .mydiv {
+        position: relative;
+        height: 300px;
+        width: 100%;
+        overflow: hidden;
       }
     </style>
   </head>
@@ -29,13 +37,16 @@
       </h1>
     </div>
     <div class="container-fluid">
-      <div class="row ">
+      <div class="row justify-content-center ">
         {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_to_news, url_img in context %}
-        <div style="border:1px solid black" class="tron col-lg-3 col-md-3 col-sm-4 ">
+        <div style="border:1px solid black" class="news_box col-lg-3 col-md-3 col-sm-4 ">
           <p class="news_title">{{title}}</p>
-          <img src="{{url_img}}" class="news_image" />
-        </div>
+          <div class="mydiv">
+            <img src="{{url_img}}" class="news_image" />
+          </div>
 
+          <p>{{desc}}</p>
+        </div>
         {% endfor %}
       </div>
     </div>
