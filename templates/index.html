@@ -9,44 +9,77 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Zhi+Mang+Xing|Montserrat+Subrayada|Dancing+Script|Amatic+SC|Monoton|Black+Ops+One|Cinzel&display=swap" rel="stylesheet" />
     <style>
+      body {
+        background: #f1f1f1;
+      }
       .news_image {
-        width: 100%;
-        height: auto;
+        height: 200px;
+        width: auto;
         overflow: hidden;
       }
       .news_title {
-        background: red;
-        margin: 0px -15px;
+        margin-top: 10px;
+        color: #1c5da2;
       }
       .news_box {
-        margin: 20px 50px;
+        background: #f6f6f6;
+        margin: 20px 15px;
+        border: 1px solid #f1f1f1;
+        padding: 20px;
+        border-top: 1px solid #4581a5;
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
       }
       .mydiv {
-        position: relative;
-        height: 300px;
-        width: 100%;
+        height: 200px;
+        width: auto;
         overflow: hidden;
+      }
+      .navbar {
+        font-size: 20px;
+      }
+      .navbar_brand {
+        margin: 5px 0 5px 10rem;
+        font-size: 20px;
+        font-family: "Montserrat Subrayada", cursive;
+      }
+      .author_info {
+        margin: 0 10rem 0 0;
+      }
+      #about {
+        color: white;
+      }
+      #contact {
+        margin: 0 30px 0 0;
+        color: white;
       }
     </style>
   </head>
   <body>
-    <div class="jumbotron" style="color:black">
-      <h1 style="color:black; border:1px solid black">
-        Happy News
-      </h1>
-    </div>
+    <nav class="navbar navbar-light bg-warning justify-content-between">
+      <a class="navbar_brand">H A P P Y &nbsp N E W S</a>
+      <div class="author_info">
+        <a id="contact" href=""><i class="fa fa-envelope-open" aria-hidden="true"></i> </a>
+        <a id="about" href=""><i class="fa fa-info-circle " aria-hidden="true"></i> </a>
+      </div>
+    </nav>
+
     <div class="container-fluid">
       <div class="row justify-content-center ">
         {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_to_news, url_img in context %}
-        <div style="border:1px solid black" class="news_box col-lg-3 col-md-3 col-sm-4 ">
-          <p class="news_title">{{title}}</p>
-          <div class="mydiv">
+        <div class="news_box col-lg-3 col-md-3 col-sm-4 justify-content-center ">
+          <a class="news_title" href="{{url_to_news}}">{{title}}</a>
+          <hr />
+          <div class="mydiv text-center">
+            <a class="news_title" href="{{url_to_news}}"><img src="{{url_img}}" class="news_image"/></a>
             <img src="{{url_img}}" class="news_image" />
           </div>
-
           <p>{{desc}}</p>
+          <hr />
         </div>
+
         {% endfor %}
       </div>
     </div>
