@@ -55,6 +55,13 @@
         margin: 0 30px 0 0;
         color: white;
       }
+      .polarity_info {
+        font-size: 11px;
+        color:#1c5858;
+      }
+      .pol_val{
+        color:slategray;
+      }
     </style>
   </head>
   <body>
@@ -69,15 +76,17 @@
     <div class="container-fluid">
       <div class="row justify-content-center ">
         {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_to_news, url_img in context %}
-        <div class="news_box col-lg-3 col-md-3 col-sm-4 justify-content-center ">
+        <div class="news_box col-lg-3 col-md-4 col-sm-12 justify-content-center ">
           <a class="news_title" href="{{url_to_news}}">{{title}}</a>
           <hr />
           <div class="mydiv text-center">
             <a class="news_title" href="{{url_to_news}}"><img src="{{url_img}}" class="news_image"/></a>
             <img src="{{url_img}}" class="news_image" />
           </div>
+          <br>
           <p>{{desc}}</p>
           <hr />
+          <span class="polarity_info ">Textblob polarity value: <i class="pol_val">{{textblob_pol}} </i>&nbsp|&nbsp IBM Watson NLU polarity value: <i class="pol_val">{{watson_pol}}</i class="pol_val"></span>
         </div>
 
         {% endfor %}
