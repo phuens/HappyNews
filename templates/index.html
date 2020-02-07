@@ -5,29 +5,39 @@
     <title>Happy News</title>
     <link
       rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <style>
+      .news_image {
+        width: 400px;
+      }
+      .news_title {
+        background: red;
+        margin: 0px;
+      }
+      .tron {
+        margin: 20px 50px;
+      }
+    </style>
   </head>
   <body>
     <div class="jumbotron" style="color:black">
-      <h1 style="color:black">
+      <h1 style="color:black; border:1px solid black">
         Happy News
       </h1>
     </div>
-    <div class="container">
-      {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_img in context %}
-      <p>{{title}}</p>
-      <p style="color:rosybrown">{{desc}}</p>
-      <p>{{publish_date}}</p>
-      <p style="color:brown">{{textblob_pol}}</p>
-      <p>{{watson_pol}}</p>
-      <p style="color:pink">{{news_station}}</p>
-      <p>{{news_content}}</p>
-      <img src="{{url_img}}" style="width:300px" />
+    <div class="container-fluid">
+      <div class="row ">
+        {% for title, desc, publish_date, textblob_pol, watson_pol, news_station, news_content, url_to_news, url_img in context %}
+        <div style="border:1px solid black" class="tron col-lg-3 col-md-3 col-sm-4 ">
+          <p class="news_title">{{title}}</p>
+          <img src="{{url_img}}" class="news_image" />
+        </div>
 
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </body>
 </html>

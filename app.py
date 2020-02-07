@@ -36,7 +36,7 @@ def Index():
         url_img.append(val['Url_to_img'])
 
     all_info = (zip(title, desc, publish_date, textblob_pol,
-                    watson_pol, news_station, news_content, url_img))
+                    watson_pol, news_station, news_content, url_to_news, url_img))
     return render_template('index.html', context=all_info)
 
 
