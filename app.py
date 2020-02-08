@@ -9,7 +9,12 @@ app = Flask(__name__)
 def Index():
     firebase_app = firebase.FirebaseApplication(
         'https://happynews-99c12.firebaseio.com/')
-    content = firebase_app.get('/happynews-99c12/', '')
+
+    #content = firebase_app.database().ref('/happynews-99c12/').orderByChild('Publish_date')
+    #ref = db.reference('/happynews-99c12/')
+    #content = ref.order_by_child('Publish_date').get()
+    content = firebase_app.get(
+        '/happynews-99c12/', '')
 
     print("\n\n", content, "\n\n")
     news_content = []
